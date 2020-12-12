@@ -10,8 +10,22 @@ class StrRes {
   static const String loadFailed = 'Load Failed!';
   static const String noData = 'No more Data';
 
+  static const String sort = 'Sort';
+  static const String filter = 'Filter';
+  static const String apply = 'Apply';
+  static const String lowestPrice = 'Lowest Price';
+  static const String highestPrice = 'Highest Price';
   static const String chooseSort = 'Choose sort type';
   static const String chooseCategory = 'Choose category type';
-  static const String seeAll = 'See All';
+
+  static const String tags = 'tags';
+  static const String addToCart = 'Add To Cart';
+
+  static const String viewCart = 'View Cart';
+  static const String payNow = 'Pay Now';
+
+  static const String total = 'TOTAL';
+  static const String myCart = 'MY CART';
+  static const String removeConfirm = 'Are you sure removing Product from Cart?';
 
 }

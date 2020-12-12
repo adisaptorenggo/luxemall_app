@@ -14,6 +14,7 @@ class GlobalVar{
   List<Product> displayProducts;
   List<Product> sortFilterProducts;
   List<Product> displaySortFilterProducts;
+  List<Product> productToCart;
 
   Map<String, int> cartProducts;
 

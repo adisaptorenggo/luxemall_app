@@ -51,3 +51,41 @@ void lxShowDialog(BuildContext context, String titleText, String contentText, {F
   );
 }
 
+void lxShowDialogTwoAction(BuildContext context, String titleText, String contentText, {Function btnPressed}) async {
+  return showDialog<void>(
+    context: context,
+    barrierDismissible: false, // user must tap button!
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text(titleText),
+        content: SingleChildScrollView(
+          child: ListBody(
+            children: <Widget>[
+              Center(child: Text(contentText)),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          FlatButton(
+            child: Text('Cancel'),
+            onPressed: (){
+              DevLog.d(DevLog.ADI, 'Cancel Button Pressed');
+              Navigator.pop(context);
+            },
+          ),
+          FlatButton(
+            child: Text('OK'),
+            onPressed: (){
+              DevLog.d(DevLog.ADI, 'Ok Button Pressed');
+              Navigator.pop(context);
+              if (btnPressed != null){
+                btnPressed();
+              }
+            },
+          ),
+        ],
+      );
+    },
+  );
+}
+

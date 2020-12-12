@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:luxemall_app/ui/cart_sreen.dart';
 import 'package:luxemall_app/ui/product_screen.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:luxemall_app/models/product.dart';
@@ -171,7 +172,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     Container(
                                       alignment: Alignment.bottomLeft,
                                       child: Text(
-                                        'tags: ',
+                                        StrRes.tags + ':  ',
                                         style: Theme.of(context).textTheme.caption.copyWith(color: ColorRes.PRIMARY),
                                       ),
                                     ),
@@ -183,7 +184,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       alignment: Alignment.bottomLeft,
                                       decoration: BoxDecoration(
                                         shape: BoxShape.rectangle,
-                                        color: ColorRes.THIRD,
+                                        color: Colors.blueGrey[200],
                                         borderRadius: BorderRadius.circular(15),
                                       ),
                                       child: Text(
@@ -206,50 +207,50 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      // bottomNavigationBar:
-      // _globalVar.cartProducts.isNotEmpty?
-      // BottomAppBar(
-      //   child: Container(
-      //     height: 80,
-      //     child: Container(
-      //       margin: EdgeInsets.all(15),
-      //       child: RaisedButton(
-      //         onPressed: () {
-      //
-      //         },
-      //         shape: RoundedRectangleBorder(
-      //           side: BorderSide.none,
-      //           borderRadius: BorderRadius.circular(5.0),
-      //         ),
-      //         padding: const EdgeInsets.all(0.0),
-      //         child: Ink(
-      //           decoration: const BoxDecoration(
-      //             gradient: LinearGradient(
-      //               colors: <Color>[
-      //                 ColorRes.PRIMARY,
-      //                 ColorRes.PRIMARY,
-      //               ],
-      //             ),
-      //             borderRadius:
-      //             BorderRadius.all(Radius.circular(5.0)),
-      //           ),
-      //           child: Container(
-      //             constraints: const BoxConstraints(
-      //                 minWidth: 88.0,
-      //                 minHeight: 36.0), // min sizes for Material buttons
-      //             alignment: Alignment.center,
-      //             child: Text(
-      //               'View Cart',
-      //               textAlign: TextAlign.center,
-      //               style: TextStyle(color: Colors.white),
-      //             ),
-      //           ),
-      //         ),
-      //       ),
-      //     ),
-      //   ),
-      // ):
-      // BottomAppBar(child: Container(height: 0,),),
+      bottomNavigationBar:
+      _globalVar.productToCart.isNotEmpty?
+      BottomAppBar(
+        child: Container(
+          height: 80,
+          child: Container(
+            margin: EdgeInsets.all(15),
+            child: RaisedButton(
+              onPressed: () {
+                navigateSlideLeft(context, CartScreen(notifyParent: refresh));
+              },
+              shape: RoundedRectangleBorder(
+                side: BorderSide.none,
+                borderRadius: BorderRadius.circular(5.0),
+              ),
+              padding: const EdgeInsets.all(0.0),
+              child: Ink(
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: <Color>[
+                      ColorRes.PRIMARY,
+                      ColorRes.PRIMARY,
+                    ],
+                  ),
+                  borderRadius:
+                  BorderRadius.all(Radius.circular(5.0)),
+                ),
+                child: Container(
+                  constraints: const BoxConstraints(
+                      minWidth: 88.0,
+                      minHeight: 36.0), // min sizes for Material buttons
+                  alignment: Alignment.center,
+                  child: Text(
+                    StrRes.viewCart,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ):
+      BottomAppBar(child: Container(height: 0,),),
       floatingActionButton: FloatingActionButton(
         heroTag: 'unique',
         child: Image.asset(
@@ -415,7 +416,7 @@ class _HomeScreenState extends State<HomeScreen> {
       image : jsonData['image'],
     );
     DevLog.d(DevLog.ADI, 'product : ' + product.toString());
-    navigateSlideLeft(context, ProductScreen(product));
+    navigateSlideLeft(context, ProductScreen(product,notifyParent: refresh));
   }
 
   void _showErrorDialog(String contentText) {

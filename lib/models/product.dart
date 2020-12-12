@@ -7,6 +7,8 @@ class Product{
   String description;
   String category;
   String image;
+  int quantity;
+  double total;
 
   Product(
       {
@@ -16,11 +18,13 @@ class Product{
         this.description = '',
         this.category = '',
         this.image = '',
+        this.quantity = 0,
+        this.total = 0.0,
       }
   );
 
   @override
   String toString() {
-    return 'Product{_id: $id, _title: $title, _price: $price, _description: $description, _category: $category, _image: $image}';
+    return 'Product{_id: $id, _title: $title, _price: $price, _description: $description, _category: $category, _image: $image, _quantity: $quantity, _total: $total}';
   }
 }

@@ -25,6 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     _globalVar.allProducts = List();
     _globalVar.displayCategory = List();
+    _globalVar.productToCart = List();
     _getAllProducts();
     super.initState();
   }

@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:luxemall_app/ui/product_screen.dart';
+import 'package:progress_dialog/progress_dialog.dart';
 import 'package:luxemall_app/models/product.dart';
 import 'package:luxemall_app/ui/sort_filter_widget.dart';
 import 'package:luxemall_app/utils/assets_resource.dart';
@@ -35,6 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
     _globalVar.sortFilterProducts = List();
     _globalVar.displaySortFilterProducts = List();
     _globalVar.displayCategoryFilterValue = List();
+    _globalVar.cartProducts = {};
     WidgetsBinding.instance.addPostFrameCallback((_) => _getDisplayProducts());
     super.initState();
   }
@@ -69,78 +72,184 @@ class _HomeScreenState extends State<HomeScreen> {
           controller: _refreshController,
           onRefresh: _onRefresh,
           onLoading: _onLoading,
-          child: ListView.builder(
-            itemBuilder: (c, index) => Container(
-              child: Row(
-                children: <Widget>[
-                  Container(
-                    child: _globalVar.displaySortFilterProducts[index].title != null?
-                    Image.network(
-                      _globalVar.displaySortFilterProducts[index].image,
-                      height: 60, width: 60,
-                    ) :
-                    Container(),
-                  ),
-                  Expanded(
+          child: GridView.count(
+            crossAxisCount: 2,
+            padding: const EdgeInsets.only(
+              right: 25,
+              left: 25,
+              bottom: 5,
+              top: 5,
+            ),
+            childAspectRatio: 9.5/15,
+            children: List.generate(_globalVar.displaySortFilterProducts.length, (index) {
+              return Container(
+                margin: EdgeInsets.only(
+                    left: 7.5,
+                    right: 7.5,
+                    top: 7
+                ),
+                child: GestureDetector(
+                  onTap: (){
+                    _onProductSelected(context, _globalVar.displaySortFilterProducts[index].id);
+                  },
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    elevation: 5.0,
                     child: Container(
-                      child: Text(
-                        _globalVar.displaySortFilterProducts[index].price != null?
-                        _globalVar.displaySortFilterProducts[index].price.toString() : ''
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight, // 10% of the width, so there are ten blinds.
+                          colors: [
+                            ColorRes.SECONDARY,
+                            ColorRes.SECONDARY,
+                          ], // whitish to gray
+                        ),
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: Column(
+                        children: <Widget>[
+                          Expanded(
+                            child: Stack(
+                              fit: StackFit.expand,
+                              children: <Widget>[
+                                Container(
+                                  child: Image.network(
+                                    _globalVar.displaySortFilterProducts[index].image,
+                                    width: 80,
+                                    height: 80,
+                                  ),
+                                ),
+                                Positioned(
+                                  right: 10,
+                                  top: 10,
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.rectangle,
+                                      color: ColorRes.PRIMARY,
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                    child: Text(
+                                      ' \$' + _globalVar.displaySortFilterProducts[index].price.toString() + ' ',
+                                      style: Theme.of(context).textTheme.headline6.copyWith(color: Colors.white),
+                                    ),
+                                  ),
+                                )
+                              ]
+                            ),
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(
+                                right: 15,
+                                left: 15
+                            ),
+                            child: Column(
+                              children: <Widget>[
+                                Container(
+                                  alignment: Alignment.bottomLeft,
+                                  child: Text(
+                                    _globalVar.displaySortFilterProducts[index].title,
+                                    style: Theme.of(context).textTheme.bodyText1.copyWith(color: ColorRes.PRIMARY),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(
+                              right: 15,
+                              left: 15,
+                              bottom: 5,
+                              top: 5
+                            ),
+                            child: Row(
+                              children: <Widget>[
+                                Column(
+                                  children: <Widget>[
+                                    Container(
+                                      alignment: Alignment.bottomLeft,
+                                      child: Text(
+                                        'tags: ',
+                                        style: Theme.of(context).textTheme.caption.copyWith(color: ColorRes.PRIMARY),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Column(
+                                  children: <Widget>[
+                                    Container(
+                                      alignment: Alignment.bottomLeft,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.rectangle,
+                                        color: ColorRes.THIRD,
+                                        borderRadius: BorderRadius.circular(15),
+                                      ),
+                                      child: Text(
+                                        '  ' + _globalVar.displaySortFilterProducts[index].category + '  ',
+                                        style: Theme.of(context).textTheme.caption.copyWith(color: Colors.white),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  )
-                ],
-              ),
-            ),
-            itemExtent: 100.0,
-            itemCount: _globalVar.displaySortFilterProducts.length,
+                  ),
+                ),
+              );
+            }).toList(),
           ),
         ),
       ),
-      bottomNavigationBar:
-      _globalVar.addToCart?
-      BottomAppBar(
-        child: Container(
-          height: 80,
-          child: Container(
-            margin: EdgeInsets.all(15),
-            child: RaisedButton(
-              onPressed: () {
-
-              },
-              shape: RoundedRectangleBorder(
-                side: BorderSide.none,
-                borderRadius: BorderRadius.circular(5.0),
-              ),
-              padding: const EdgeInsets.all(0.0),
-              child: Ink(
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: <Color>[
-                      ColorRes.PRIMARY,
-                      ColorRes.PRIMARY,
-                    ],
-                  ),
-                  borderRadius:
-                  BorderRadius.all(Radius.circular(5.0)),
-                ),
-                child: Container(
-                  constraints: const BoxConstraints(
-                      minWidth: 88.0,
-                      minHeight: 36.0), // min sizes for Material buttons
-                  alignment: Alignment.center,
-                  child: Text(
-                    'View Cart',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
-      ):
-      BottomAppBar(child: Container(),),
+      // bottomNavigationBar:
+      // _globalVar.cartProducts.isNotEmpty?
+      // BottomAppBar(
+      //   child: Container(
+      //     height: 80,
+      //     child: Container(
+      //       margin: EdgeInsets.all(15),
+      //       child: RaisedButton(
+      //         onPressed: () {
+      //
+      //         },
+      //         shape: RoundedRectangleBorder(
+      //           side: BorderSide.none,
+      //           borderRadius: BorderRadius.circular(5.0),
+      //         ),
+      //         padding: const EdgeInsets.all(0.0),
+      //         child: Ink(
+      //           decoration: const BoxDecoration(
+      //             gradient: LinearGradient(
+      //               colors: <Color>[
+      //                 ColorRes.PRIMARY,
+      //                 ColorRes.PRIMARY,
+      //               ],
+      //             ),
+      //             borderRadius:
+      //             BorderRadius.all(Radius.circular(5.0)),
+      //           ),
+      //           child: Container(
+      //             constraints: const BoxConstraints(
+      //                 minWidth: 88.0,
+      //                 minHeight: 36.0), // min sizes for Material buttons
+      //             alignment: Alignment.center,
+      //             child: Text(
+      //               'View Cart',
+      //               textAlign: TextAlign.center,
+      //               style: TextStyle(color: Colors.white),
+      //             ),
+      //           ),
+      //         ),
+      //       ),
+      //     ),
+      //   ),
+      // ):
+      // BottomAppBar(child: Container(height: 0,),),
       floatingActionButton: FloatingActionButton(
         heroTag: 'unique',
         child: Image.asset(
@@ -154,6 +263,10 @@ class _HomeScreenState extends State<HomeScreen> {
         },
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+
+  void _onProductSelected(context, int id){
+    _getProduct(id);
   }
 
   void _onSortFilterPressed(context){
@@ -176,7 +289,12 @@ class _HomeScreenState extends State<HomeScreen> {
     // if failed,use refreshFailed()
     _refresh = true;
     if(_globalVar.sortFilter){
-
+      _globalVar.displaySortFilterProducts.clear();
+      _sfLimit = 4;
+      for(var i = 0 ; i <_sfLimit ; i++){
+        _globalVar.displaySortFilterProducts.add(_globalVar.sortFilterProducts[i]);
+      }
+      _refreshController.refreshCompleted();
     }else{
       _getDisplayProducts();
     }
@@ -191,15 +309,17 @@ class _HomeScreenState extends State<HomeScreen> {
     _load = true;
     if(_globalVar.sortFilter){
       if(_globalVar.displaySortFilterProducts.length >= _globalVar.sortFilterProducts.length){
-        _refreshController.loadNoData();
+        _refreshController.loadComplete();
       } else{
         _sfLimit += 4;
         _globalVar.displaySortFilterProducts.clear();
-        for(var i = 0 ; i <_sfLimit ; i++){
+        for(var i = 0 ; i < _sfLimit ; i++){
+          if(i == _globalVar.sortFilterProducts.length) break;
           _globalVar.displaySortFilterProducts.add(_globalVar.sortFilterProducts[i]);
         }
         setState(() {
         });
+        _refreshController.loadComplete();
       }
     }else{
       _limit += 4;
@@ -207,25 +327,31 @@ class _HomeScreenState extends State<HomeScreen> {
         _getDisplayProducts();
       }else{
         _limit = 20;
-        _refreshController.loadNoData();
+        _refreshController.loadComplete();
       }
     }
 
     if(mounted) {
-      setState(() {});
+      setState(() {
+        _sfLimit = 4;
+      });
     }
 
   }
 
   void _getDisplayProducts() {
     DevLog.d(DevLog.ADI, 'Get All Products Message');
-    Future<String> ftDisplayProducts = getLimitProducts(_limit.toString());
-    ftDisplayProducts.then((onValue) {
-      if (onValue.length == 0) {
-        _showErrorDialog('Server Error');
-      } else {
-        _handleGetdisplayProductsMessage(onValue);
-      }
+    Future<ProgressDialog> ftProgressDialog = loadingDialog(context, StrRes.plsWait);
+    ftProgressDialog.then((progressDialog) {
+      Future<String> ftDisplayProducts = getLimitProducts(_limit.toString());
+      ftDisplayProducts.then((onValue) {
+        progressDialog.hide();
+        if (onValue.length == 0) {
+          _showErrorDialog('Server Error');
+        } else {
+          _handleGetdisplayProductsMessage(onValue);
+        }
+      });
     });
   }
 
@@ -259,6 +385,37 @@ class _HomeScreenState extends State<HomeScreen> {
       _refreshController.loadComplete();
     }
     // DevLog.d(DevLog.ADI, 'displayProducts : ' + _globalVar.displayProducts.toString());
+  }
+
+  void _getProduct(int id) {
+    DevLog.d(DevLog.ADI, 'Get Product Message');
+    Future<ProgressDialog> ftProgressDialog = loadingDialog(context, StrRes.plsWait);
+    ftProgressDialog.then((progressDialog) {
+      Future<String> ftProduct = getProduct(id.toString());
+      ftProduct.then((onValue) {
+        // DevLog.d(DevLog.ADI, 'Get Product Response : $onValue');
+        progressDialog.hide();
+        if (onValue.length == 0) {
+          _showErrorDialog('Server Error');
+        } else {
+          _handleGetProductMessage(onValue);
+        }
+      });
+    });
+  }
+
+  void _handleGetProductMessage(String response) async {
+    Map<String, dynamic> jsonData = parseResponse2(response);
+    Product product = Product(
+      id : jsonData['id'],
+      title : jsonData['title'],
+      price : jsonData['price'].toDouble(),
+      description : jsonData['description'],
+      category : jsonData['category'],
+      image : jsonData['image'],
+    );
+    DevLog.d(DevLog.ADI, 'product : ' + product.toString());
+    navigateSlideLeft(context, ProductScreen(product));
   }
 
   void _showErrorDialog(String contentText) {

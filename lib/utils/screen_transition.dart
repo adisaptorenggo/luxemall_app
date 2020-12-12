@@ -18,6 +18,10 @@ Route slideLeft(Widget widget) {
   );
 }
 
+Future navigateSlideLeft(BuildContext context, Widget widget) async {
+  Navigator.of(context).push(slideLeft(widget));
+}
+
 Future navigateReplaceSlideLeft(BuildContext context, Widget widget) async {
   Navigator.of(context).pushReplacement(slideLeft(widget));
 }

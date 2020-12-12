@@ -15,7 +15,7 @@ class GlobalVar{
   List<Product> sortFilterProducts;
   List<Product> displaySortFilterProducts;
 
-  bool addToCart = true;
+  Map<String, int> cartProducts;
 
   //Sort And Filter
   bool sortFilter;

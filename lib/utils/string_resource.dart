@@ -3,6 +3,8 @@ class StrRes {
   static const String appName = 'LUXEMALL';
   static const String version = 'Version';
 
+  static const String plsWait = 'Please Wait. . .';
+
   static const String pullUpload = 'pull up load';
   static const String loadMore = 'Release to load more';
   static const String loadFailed = 'Load Failed!';

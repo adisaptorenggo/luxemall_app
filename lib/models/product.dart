@@ -3,7 +3,7 @@ class Product{
 
   int id;
   String title;
-  String price;
+  double price;
   String description;
   String category;
   String image;
@@ -12,7 +12,7 @@ class Product{
       {
         this.id = 0,
         this.title = '',
-        this.price = '',
+        this.price = 0.0,
         this.description = '',
         this.category = '',
         this.image = '',

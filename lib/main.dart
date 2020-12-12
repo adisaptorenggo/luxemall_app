@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:luxemall_app/screens/splash_screen.dart';
+import 'package:luxemall_app/ui/splash_screen.dart';
 import 'package:luxemall_app/utils/colors_resource.dart';
 import 'package:luxemall_app/utils/string_resource.dart';
 

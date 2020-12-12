@@ -8,4 +8,8 @@ class StrRes {
   static const String loadFailed = 'Load Failed!';
   static const String noData = 'No more Data';
 
+  static const String chooseSort = 'Choose sort type';
+  static const String chooseCategory = 'Choose category type';
+  static const String seeAll = 'See All';
+
 }

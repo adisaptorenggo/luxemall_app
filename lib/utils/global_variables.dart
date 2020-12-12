@@ -11,5 +11,15 @@ class GlobalVar{
   GlobalVar._internal();
 
   List<Product> allProducts;
+  List<Product> displayProducts;
+  List<Product> sortFilterProducts;
+  List<Product> displaySortFilterProducts;
+
   bool addToCart = true;
+
+  //Sort And Filter
+  bool sortFilter;
+  String sortType = '';
+  List<String> displayCategory;
+  List<String> displayCategoryFilterValue;
 }

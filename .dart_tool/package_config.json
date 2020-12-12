@@ -68,6 +68,18 @@
       "languageVersion": "2.2"
     },
     {
+      "name": "http",
+      "rootUri": "file:///C:/Users/User/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/http-0.12.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.4"
+    },
+    {
+      "name": "http_parser",
+      "rootUri": "file:///C:/Users/User/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/http_parser-3.1.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.3"
+    },
+    {
       "name": "image",
       "rootUri": "file:///C:/Users/User/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/image-2.1.12",
       "packageUri": "lib/",
@@ -92,10 +104,22 @@
       "languageVersion": "2.0"
     },
     {
+      "name": "pedantic",
+      "rootUri": "file:///C:/Users/User/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/pedantic-1.9.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.1"
+    },
+    {
       "name": "petitparser",
       "rootUri": "file:///C:/Users/User/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/petitparser-2.4.0",
       "packageUri": "lib/",
       "languageVersion": "2.4"
+    },
+    {
+      "name": "progress_dialog",
+      "rootUri": "file:///C:/Users/User/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/progress_dialog-1.2.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.7"
     },
     {
       "name": "quiver",
@@ -170,7 +194,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2020-12-11T21:13:17.309982Z",
+  "generated": "2020-12-11T22:07:32.023975Z",
   "generator": "pub",
   "generatorVersion": "2.8.4"
 }

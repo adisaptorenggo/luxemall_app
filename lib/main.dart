@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:luxemall_app/resources/colors_resource.dart';
-import 'package:luxemall_app/resources/string_resource.dart';
 import 'package:luxemall_app/screens/splash_screen.dart';
+import 'package:luxemall_app/utils/colors_resource.dart';
+import 'package:luxemall_app/utils/string_resource.dart';
 
 void main() {
   runApp(MyApp());

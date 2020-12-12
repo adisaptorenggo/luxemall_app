@@ -27,8 +27,8 @@ List<dynamic> parseResponse(String response){
 }
 
 
-Future<String> getAllProducts() {
-  String url = 'https://fakestoreapi.com/products';
+Future<String> getAllProducts(String limit) {
+  String url = 'https://fakestoreapi.com/products?limit=' + limit;
 
   return HttpRequest.httpGet(url);
 }

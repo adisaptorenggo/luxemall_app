@@ -39,7 +39,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void _getAllProducts() {
     DevLog.d(DevLog.ADI, 'Get All Products Message');
-    Future<String> ftAllProducts = getAllProducts();
+    Future<String> ftAllProducts = getAllProducts('20');
     ftAllProducts.then((onValue) {
       DevLog.d(DevLog.ADI, 'Get All Products Message Response : $onValue');
       if (onValue.length == 0) {

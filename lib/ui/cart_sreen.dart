@@ -126,30 +126,30 @@ class _CartScreenState extends State<CartScreen> {
                                           ),
                                         ),
                                         Container(
-                                          padding: EdgeInsets.only(top: 10),
+                                          padding: EdgeInsets.only(top: 5),
                                           child: Row(
                                             children: <Widget>[
                                               Container(
                                                 child: Text(
                                                   _globalVar.productToCart[index].quantity.toString(),
-                                                  style: Theme.of(context).textTheme.bodyText1.copyWith(color: ColorRes.THIRD),
+                                                  style: Theme.of(context).textTheme.caption.copyWith(color: ColorRes.THIRD),
                                                 ),
                                               ),
                                               Container(
                                                 child: Text(
                                                   ' x ',
-                                                  style: Theme.of(context).textTheme.bodyText1.copyWith(color: ColorRes.THIRD),
+                                                  style: Theme.of(context).textTheme.caption.copyWith(color: ColorRes.THIRD),
                                                 ),
                                               ),
                                               Container(
                                                 child: Text(
                                                   '\$ ' + _globalVar.productToCart[index].price.toString(),
-                                                  style: Theme.of(context).textTheme.bodyText1.copyWith(color: ColorRes.THIRD),
+                                                  style: Theme.of(context).textTheme.caption.copyWith(color: ColorRes.THIRD),
                                                 ),
                                               ),
                                               Expanded(
                                                 child: Container(
-                                                  margin: EdgeInsets.only(right: 10),
+                                                  margin: EdgeInsets.only(right: 5),
                                                   child: Row(
                                                     mainAxisAlignment: MainAxisAlignment.end,
                                                     children: <Widget>[
@@ -173,7 +173,7 @@ class _CartScreenState extends State<CartScreen> {
                                                             padding: EdgeInsets.all(5),
                                                             child: Image.asset(
                                                               AssetRes.minus,
-                                                              width: 20, height:20,
+                                                              width: 15, height:15,
                                                               color: Colors.white,
                                                             ),
                                                           )
@@ -185,7 +185,7 @@ class _CartScreenState extends State<CartScreen> {
                                                         ),
                                                         child: Text(
                                                           _globalVar.productToCart[index].quantity.toString(),
-                                                          style: Theme.of(context).textTheme.bodyText2.copyWith(color: ColorRes.THIRD),
+                                                          style: Theme.of(context).textTheme.caption.copyWith(color: ColorRes.THIRD),
                                                         ),
                                                       ),
                                                       GestureDetector(
@@ -206,7 +206,7 @@ class _CartScreenState extends State<CartScreen> {
                                                               padding: EdgeInsets.all(5),
                                                               child: Image.asset(
                                                                 AssetRes.plus,
-                                                                width: 20, height:20,
+                                                                width: 15, height:15,
                                                                 color: Colors.white,
                                                               ),
                                                             )

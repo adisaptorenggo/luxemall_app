@@ -28,11 +28,13 @@ class _HomeScreenState extends State<HomeScreen> {
   int _sfLimit = 4;
   RefreshController _refreshController = RefreshController(initialRefresh: false);
   bool _refresh = false, _load = false;
+  bool _firstBuild;
 
   GlobalVar _globalVar = GlobalVar();
 
   @override
   void initState() {
+    _firstBuild = true;
     _globalVar.sortFilter = false;
     _globalVar.displayProducts = List();
     _globalVar.sortFilterProducts = List();
@@ -152,7 +154,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   alignment: Alignment.bottomLeft,
                                   child: Text(
                                     _globalVar.displaySortFilterProducts[index].title,
-                                    style: Theme.of(context).textTheme.bodyText1.copyWith(color: ColorRes.PRIMARY),
+                                    style: Theme.of(context).textTheme.overline.copyWith(fontWeight: FontWeight.bold, color: ColorRes.PRIMARY),
                                   ),
                                 ),
                               ],
@@ -331,18 +333,30 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void _getDisplayProducts() {
     DevLog.d(DevLog.ADI, 'Get All Products Message');
-    Future<ProgressDialog> ftProgressDialog = loadingDialog(context, StrRes.plsWait);
-    ftProgressDialog.then((progressDialog) {
+    if(_firstBuild){
+      _firstBuild = false;
+      Future<ProgressDialog> ftProgressDialog = loadingDialog(context, StrRes.plsWait);
+      ftProgressDialog.then((progressDialog) {
+        Future<String> ftDisplayProducts = getLimitProducts(_limit.toString());
+        ftDisplayProducts.then((onValue) {
+          progressDialog.hide();
+          if (onValue.length == 0) {
+            _showErrorDialog('Server Error');
+          } else {
+            _handleGetdisplayProductsMessage(onValue);
+          }
+        });
+      });
+    } else{
       Future<String> ftDisplayProducts = getLimitProducts(_limit.toString());
       ftDisplayProducts.then((onValue) {
-        progressDialog.hide();
         if (onValue.length == 0) {
           _showErrorDialog('Server Error');
         } else {
           _handleGetdisplayProductsMessage(onValue);
         }
       });
-    });
+    }
   }
 
   void _handleGetdisplayProductsMessage(String response) async {

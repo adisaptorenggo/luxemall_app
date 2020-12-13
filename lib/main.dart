@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: StrRes.appName,
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
 
         // Define the default brightness and colors.

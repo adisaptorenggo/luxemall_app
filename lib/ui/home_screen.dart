@@ -171,24 +171,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                   children: <Widget>[
                                     Container(
                                       alignment: Alignment.bottomLeft,
-                                      child: Text(
-                                        StrRes.tags + ':  ',
-                                        style: Theme.of(context).textTheme.caption.copyWith(color: ColorRes.PRIMARY),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Column(
-                                  children: <Widget>[
-                                    Container(
-                                      alignment: Alignment.bottomLeft,
                                       decoration: BoxDecoration(
                                         shape: BoxShape.rectangle,
                                         color: Colors.blueGrey[200],
                                         borderRadius: BorderRadius.circular(15),
                                       ),
                                       child: Text(
-                                        '  ' + _globalVar.displaySortFilterProducts[index].category + '  ',
+                                        ' ' + _globalVar.displaySortFilterProducts[index].category + ' ',
                                         style: Theme.of(context).textTheme.caption.copyWith(color: Colors.white),
                                       ),
                                     ),

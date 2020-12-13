@@ -132,7 +132,7 @@ class _ProductScreenState extends State<ProductScreen> {
                   Container(
                     alignment: Alignment.bottomLeft,
                     child: Text(
-                      StrRes.tags + ':   ',
+                      StrRes.tags + ': ',
                       style: Theme.of(context).textTheme.bodyText2.copyWith(color: ColorRes.PRIMARY),
                     ),
                   ),

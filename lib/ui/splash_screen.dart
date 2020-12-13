@@ -49,9 +49,9 @@ class _SplashScreenState extends State<SplashScreen> {
     DevLog.d(DevLog.ADI, 'Get All Products Message');
     Future<String> ftAllProducts = getAllProducts();
     ftAllProducts.then((onValue) {
-      // DevLog.d(DevLog.ADI, 'Get All Products Message Response : $onValue');
+      DevLog.d(DevLog.ADI, 'Get All Products Message Response : $onValue');
       if (onValue.length == 0) {
-        _showErrorDialog('Server Error');
+        _showErrorDialog('Server Error: $onValue');
       } else {
         _handleGetAllProductsMessage(onValue);
       }

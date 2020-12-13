@@ -28,225 +28,231 @@ class _SortAndFilterWidgetState extends State<SortAndFilterWidget> {
   Widget build(BuildContext context) {
     return Container(
       height: MediaQuery.of(context).size.height * 0.58,
-      child: ListView(
+      child: Column(
         children: <Widget>[
-          Container(
-            margin: EdgeInsets.only(
-              top: 10, bottom: 10
-            ),
-            child: Image.asset(
-              AssetRes.mainLogo,
-              width: 30, height: 30,
-            ),
-          ),
-          Container(
-            child: Column(
+          Expanded(
+            child: ListView(
               children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: Container(
-                        margin: EdgeInsets.only(
-                          left: 15.0,
-                        ),
-                        child: Text(
-                          StrRes.sort,
-                          style: Theme.of(context).textTheme.subtitle1,
-                        ),
-                      ),
-                    ),
-                  ],
+                Container(
+                  margin: EdgeInsets.only(
+                      top: 10, bottom: 10
+                  ),
+                  child: Image.asset(
+                    AssetRes.mainLogo,
+                    width: 30, height: 30,
+                  ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 5.0),
-                  decoration: BoxDecoration(
-                      border: Border(top: BorderSide(color: ColorRes.SECONDARY))
-                  ),
-                  child: Container(
-                      margin: EdgeInsets.only(
-                        left: 15.0,
-                      ),
-                      child: Column(
+                  child: Column(
+                    children: <Widget>[
+                      Row(
                         children: <Widget>[
-                          Container(
-                            margin: EdgeInsets.only(bottom: 10),
-                            child: Row(
-                              children: <Widget>[
-                                Expanded(
-                                  child: Text(
-                                    StrRes.chooseSort,
-                                    style: Theme.of(context).textTheme.bodyText2,
-                                  ),
-                                ),
-                              ],
+                          Expanded(
+                            child: Container(
+                              margin: EdgeInsets.only(
+                                left: 15.0,
+                              ),
+                              child: Text(
+                                StrRes.sort,
+                                style: Theme.of(context).textTheme.subtitle1,
+                              ),
                             ),
                           ),
-                          Container(
+                        ],
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(top: 5.0),
+                        decoration: BoxDecoration(
+                            border: Border(top: BorderSide(color: ColorRes.SECONDARY))
+                        ),
+                        child: Container(
+                            margin: EdgeInsets.only(
+                              left: 15.0,
+                            ),
                             child: Column(
                               children: <Widget>[
                                 Container(
-                                  margin: EdgeInsets.only(
-                                    right: 30.0,
-                                    left: 30.0,
-                                  ),
-                                  child: RaisedButton(
-                                    shape: RoundedRectangleBorder(
-                                      side: BorderSide(color: ColorRes.PRIMARY, width:1.0),
-                                      borderRadius: BorderRadius.circular(80.0),
-                                    ),
-                                    onPressed: () {
-                                      setState(() {
-                                        if (_globalVar.sortType == 'asc') {
-                                          _globalVar.sortType = '';
-                                        } else {
-                                          _globalVar.sortType = 'asc';
-                                        }
-                                      });
-                                    },
-                                    color: _globalVar.sortType == 'asc' ? ColorRes.THIRD : Colors.white,
-                                    child: Container( // min sizes for Material buttons
-                                      alignment: Alignment.center,
-                                      child: Text(
-                                        StrRes.lowestPrice,
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            color: _globalVar.sortType == 'asc' ? Colors.white : ColorRes.PRIMARY
+                                  margin: EdgeInsets.only(bottom: 10),
+                                  child: Row(
+                                    children: <Widget>[
+                                      Expanded(
+                                        child: Text(
+                                          StrRes.chooseSort,
+                                          style: Theme.of(context).textTheme.bodyText2,
                                         ),
                                       ),
-                                    ),
+                                    ],
                                   ),
                                 ),
                                 Container(
-                                  margin: EdgeInsets.only(
-                                    right: 30.0,
-                                    left: 30.0,
-                                    bottom: 10,
-                                  ),
-                                  child: RaisedButton(
-                                    shape: RoundedRectangleBorder(
-                                      side: BorderSide(color: ColorRes.PRIMARY, width:1.0),
-                                      borderRadius: BorderRadius.circular(80.0),
-                                    ),
-                                    onPressed: () {
-                                      setState(() {
-                                        if (_globalVar.sortType == 'desc') {
-                                          _globalVar.sortType = '';
-                                        } else {
-                                          _globalVar.sortType = 'desc';
-                                        }
-                                      });
-                                    },
-                                    color: _globalVar.sortType == 'desc' ? ColorRes.THIRD : Colors.white,
-                                    child: Container( // min sizes for Material buttons
-                                      alignment: Alignment.center,
-                                      child: Text(
-                                        StrRes.highestPrice,
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            color: _globalVar.sortType == 'desc' ? Colors.white : ColorRes.PRIMARY
+                                  child: Column(
+                                    children: <Widget>[
+                                      Container(
+                                        margin: EdgeInsets.only(
+                                          right: 30.0,
+                                          left: 30.0,
+                                        ),
+                                        child: RaisedButton(
+                                          shape: RoundedRectangleBorder(
+                                            side: BorderSide(color: ColorRes.PRIMARY, width:1.0),
+                                            borderRadius: BorderRadius.circular(80.0),
+                                          ),
+                                          onPressed: () {
+                                            setState(() {
+                                              if (_globalVar.sortType == 'asc') {
+                                                _globalVar.sortType = '';
+                                              } else {
+                                                _globalVar.sortType = 'asc';
+                                              }
+                                            });
+                                          },
+                                          color: _globalVar.sortType == 'asc' ? ColorRes.THIRD : Colors.white,
+                                          child: Container( // min sizes for Material buttons
+                                            alignment: Alignment.center,
+                                            child: Text(
+                                              StrRes.lowestPrice,
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                  color: _globalVar.sortType == 'asc' ? Colors.white : ColorRes.PRIMARY
+                                              ),
+                                            ),
+                                          ),
                                         ),
                                       ),
-                                    ),
+                                      Container(
+                                        margin: EdgeInsets.only(
+                                          right: 30.0,
+                                          left: 30.0,
+                                          bottom: 10,
+                                        ),
+                                        child: RaisedButton(
+                                          shape: RoundedRectangleBorder(
+                                            side: BorderSide(color: ColorRes.PRIMARY, width:1.0),
+                                            borderRadius: BorderRadius.circular(80.0),
+                                          ),
+                                          onPressed: () {
+                                            setState(() {
+                                              if (_globalVar.sortType == 'desc') {
+                                                _globalVar.sortType = '';
+                                              } else {
+                                                _globalVar.sortType = 'desc';
+                                              }
+                                            });
+                                          },
+                                          color: _globalVar.sortType == 'desc' ? ColorRes.THIRD : Colors.white,
+                                          child: Container( // min sizes for Material buttons
+                                            alignment: Alignment.center,
+                                            child: Text(
+                                              StrRes.highestPrice,
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                  color: _globalVar.sortType == 'desc' ? Colors.white : ColorRes.PRIMARY
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                ),
+                                )
                               ],
-                            ),
-                          )
-                        ],
-                      )
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.only(
-              top: 5,
-            ),
-            child: Column(
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: Container(
-                        margin: EdgeInsets.only(
-                          left: 15.0,
-                        ),
-                        child: Text(
-                          StrRes.filter,
-                          style: Theme.of(context).textTheme.subtitle1,
+                            )
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 5.0),
-                  decoration: BoxDecoration(
-                      border: Border(top: BorderSide(color: ColorRes.SECONDARY))
+                  margin: EdgeInsets.only(
+                    top: 5,
                   ),
-                  child: Container(
-                      margin: EdgeInsets.only(
-                          left: 15.0,
-                      ),
-                      child: Column(
+                  child: Column(
+                    children: <Widget>[
+                      Row(
                         children: <Widget>[
-                          Container(
-                            margin: EdgeInsets.only(bottom: 10),
-                            child: Row(
-                              children: <Widget>[
-                                Expanded(
-                                  child: Text(
-                                    StrRes.chooseCategory,
-                                    style: Theme.of(context).textTheme.bodyText2,
-                                  ),
-                                ),
-                              ],
+                          Expanded(
+                            child: Container(
+                              margin: EdgeInsets.only(
+                                left: 15.0,
+                              ),
+                              child: Text(
+                                StrRes.filter,
+                                style: Theme.of(context).textTheme.subtitle1,
+                              ),
                             ),
                           ),
-                          Container(
-                            height: 40,
-                            child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemBuilder: (c, index) {
-                                return Container(
-                                  margin: EdgeInsets.only(
-                                      right: 5.0,
-                                      top: 2.0,
-                                      bottom: 2.0
-                                  ),
-                                  child: RaisedButton(
-                                    shape: RoundedRectangleBorder(
-                                      side: BorderSide(color: ColorRes.PRIMARY, width:1.0),
-                                      borderRadius: BorderRadius.circular(80.0),
-
-                                    ),
-                                    onPressed: () {
-                                      setState(() {
-                                        if (_globalVar.displayCategoryFilterValue.contains(_globalVar.displayCategory[index])){
-                                          _globalVar.displayCategoryFilterValue.remove(_globalVar.displayCategory[index]);
-                                        }else {
-                                          _globalVar.displayCategoryFilterValue.add(_globalVar.displayCategory[index]);
-                                        }
-                                      });
-                                    },
-                                    color: _globalVar.displayCategoryFilterValue.length == 0 || !_globalVar.displayCategoryFilterValue.contains(_globalVar.displayCategory[index]) ? Colors.white : ColorRes.THIRD,
-                                    child: Container( // min sizes for Material buttons
-                                      alignment: Alignment.center,
-                                      child: Text(
-                                        _globalVar.displayCategory[index],
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(color: _globalVar.displayCategoryFilterValue.length == 0 || !_globalVar.displayCategoryFilterValue.contains(_globalVar.displayCategory[index])? ColorRes.PRIMARY : Colors.white),
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              },
-                              itemCount: _globalVar.displayCategory.length,
-                            ),
-                          )
                         ],
-                      )
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(top: 5.0),
+                        decoration: BoxDecoration(
+                            border: Border(top: BorderSide(color: ColorRes.SECONDARY))
+                        ),
+                        child: Container(
+                            margin: EdgeInsets.only(
+                              left: 15.0,
+                            ),
+                            child: Column(
+                              children: <Widget>[
+                                Container(
+                                  margin: EdgeInsets.only(bottom: 10),
+                                  child: Row(
+                                    children: <Widget>[
+                                      Expanded(
+                                        child: Text(
+                                          StrRes.chooseCategory,
+                                          style: Theme.of(context).textTheme.bodyText2,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  height: 40,
+                                  child: ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                    itemBuilder: (c, index) {
+                                      return Container(
+                                        margin: EdgeInsets.only(
+                                            right: 5.0,
+                                            top: 2.0,
+                                            bottom: 2.0
+                                        ),
+                                        child: RaisedButton(
+                                          shape: RoundedRectangleBorder(
+                                            side: BorderSide(color: ColorRes.PRIMARY, width:1.0),
+                                            borderRadius: BorderRadius.circular(80.0),
+
+                                          ),
+                                          onPressed: () {
+                                            setState(() {
+                                              if (_globalVar.displayCategoryFilterValue.contains(_globalVar.displayCategory[index])){
+                                                _globalVar.displayCategoryFilterValue.remove(_globalVar.displayCategory[index]);
+                                              }else {
+                                                _globalVar.displayCategoryFilterValue.add(_globalVar.displayCategory[index]);
+                                              }
+                                            });
+                                          },
+                                          color: _globalVar.displayCategoryFilterValue.length == 0 || !_globalVar.displayCategoryFilterValue.contains(_globalVar.displayCategory[index]) ? Colors.white : ColorRes.THIRD,
+                                          child: Container( // min sizes for Material buttons
+                                            alignment: Alignment.center,
+                                            child: Text(
+                                              _globalVar.displayCategory[index],
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(color: _globalVar.displayCategoryFilterValue.length == 0 || !_globalVar.displayCategoryFilterValue.contains(_globalVar.displayCategory[index])? ColorRes.PRIMARY : Colors.white),
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    itemCount: _globalVar.displayCategory.length,
+                                  ),
+                                )
+                              ],
+                            )
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],

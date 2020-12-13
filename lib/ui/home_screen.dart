@@ -35,6 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     _firstBuild = true;
+    _globalVar.firstSortFilter = false;
     _globalVar.sortFilter = false;
     _globalVar.displayProducts = List();
     _globalVar.sortFilterProducts = List();
@@ -300,13 +301,24 @@ class _HomeScreenState extends State<HomeScreen> {
 
     _load = true;
     if(_globalVar.sortFilter){
+      if(_globalVar.firstSortFilter){
+        _globalVar.firstSortFilter = false;
+        _sfLimit = 4;
+      }
+      DevLog.d(DevLog.ADI,'if 1');
       if(_globalVar.displaySortFilterProducts.length >= _globalVar.sortFilterProducts.length){
         _refreshController.loadComplete();
+        DevLog.d(DevLog.ADI,'if 2');
       } else{
         _sfLimit += 4;
+        DevLog.d(DevLog.ADI,'if 3 '+_sfLimit.toString());
         _globalVar.displaySortFilterProducts.clear();
         for(var i = 0 ; i < _sfLimit ; i++){
-          if(i == _globalVar.sortFilterProducts.length) break;
+          DevLog.d(DevLog.ADI,'if 4 '+i.toString());
+          if(i == _globalVar.sortFilterProducts.length) {
+            DevLog.d(DevLog.ADI,'if 5');
+            break;
+          }
           _globalVar.displaySortFilterProducts.add(_globalVar.sortFilterProducts[i]);
         }
         setState(() {
@@ -314,6 +326,7 @@ class _HomeScreenState extends State<HomeScreen> {
         _refreshController.loadComplete();
       }
     }else{
+      DevLog.d(DevLog.ADI,'if 6');
       _limit += 4;
       if(_limit <= 20){
         _getDisplayProducts();
@@ -325,7 +338,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
     if(mounted) {
       setState(() {
-        _sfLimit = 4;
       });
     }
 

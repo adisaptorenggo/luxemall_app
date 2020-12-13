@@ -20,6 +20,7 @@ class GlobalVar{
 
   //Sort And Filter
   bool sortFilter;
+  bool firstSortFilter;
   String sortType = '';
   List<String> displayCategory;
   List<String> displayCategoryFilterValue;

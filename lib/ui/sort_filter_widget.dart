@@ -273,16 +273,26 @@ class _SortAndFilterWidgetState extends State<SortAndFilterWidget> {
                   _globalVar.displaySortFilterProducts.clear();
                   _globalVar.displaySortFilterProducts.addAll(_globalVar.displayProducts);
                   _globalVar.sortFilter = false;
+                  _globalVar.firstSortFilter = false;
                 }
                 else if(_globalVar.sortType != '' && _globalVar.displayCategoryFilterValue.isEmpty){
                   DevLog.d(DevLog.ADI, 'if : 2');
                   _globalVar.sortFilterProducts.clear();
                   _globalVar.displaySortFilterProducts.clear();
-                  _globalVar.displaySortFilterProducts.addAll(_globalVar.displayProducts);
+                  _globalVar.firstSortFilter = true;
+                  _globalVar.sortFilter = true;
+                  _globalVar.sortFilterProducts.addAll(_globalVar.allProducts);
                   if(_globalVar.sortType == 'asc'){
-                    _globalVar.displaySortFilterProducts.sort((a, b) => a.price.compareTo(b.price));
+                    _globalVar.sortFilterProducts.sort((a, b) => a.price.compareTo(b.price));
                   } else{
-                    _globalVar.displaySortFilterProducts.sort((a, b) => b.price.compareTo(a.price));
+                    _globalVar.sortFilterProducts.sort((a, b) => b.price.compareTo(a.price));
+                  }
+                  int j=0;
+                  for(var i = 0 ; i < _globalVar.sortFilterProducts.length; i++){
+                    if(j < 4){
+                      _globalVar.displaySortFilterProducts.add(_globalVar.sortFilterProducts[i]);
+                    }
+                    j ++;
                   }
                 }
                 else if(_globalVar.sortType == '' && _globalVar.displayCategoryFilterValue.isNotEmpty){
@@ -290,6 +300,7 @@ class _SortAndFilterWidgetState extends State<SortAndFilterWidget> {
                   _globalVar.sortFilterProducts.clear();
                   _globalVar.displaySortFilterProducts.clear();
                   _globalVar.sortFilter = true;
+                  _globalVar.firstSortFilter = true;
                   var j = 0;
                   for(var i = 0; i < _globalVar.allProducts.length ; i++){
                     if(_globalVar.displayCategoryFilterValue.any((element) => element == _globalVar.allProducts[i].category)){
@@ -307,6 +318,7 @@ class _SortAndFilterWidgetState extends State<SortAndFilterWidget> {
                   _globalVar.sortFilterProducts.clear();
                   _globalVar.displaySortFilterProducts.clear();
                   _globalVar.sortFilter = true;
+                  _globalVar.firstSortFilter = true;
                   for(var i = 0; i < _globalVar.allProducts.length ; i++){
                     if(_globalVar.displayCategoryFilterValue.any((element) => element == _globalVar.allProducts[i].category)){
                       _globalVar.sortFilterProducts.add(_globalVar.allProducts[i]);
